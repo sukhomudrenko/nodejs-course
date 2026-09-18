@@ -1,12 +1,13 @@
-import Book from '../models/Book.mjs'
+import BookModel from '../models/BookModel.mjs'
 
 class MainController {
 	static mainPage(req, res) {
 		res.render('index', { title: 'Book Manager App' })
 	}
 	static aboutPage(req, res) {
-		const booksList = Book.loadBooksList()
+		const booksList = BookModel.loadBooksList()
 		const totalBooks = booksList.length
+		console.log('totalBooks :', totalBooks)
 		const oldestBook = booksList.reduce((oldest, book) => {
 			if (!oldest) return book
 			return Number(book.year) < Number(oldest.year) ? book : oldest

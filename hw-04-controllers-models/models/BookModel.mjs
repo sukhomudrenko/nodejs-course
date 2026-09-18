@@ -1,6 +1,6 @@
 import DataFileManager from '../services/DataFileManager.mjs'
 
-class Book {
+class BookModel {
 	static loadBooksList(filters = {}) {
 		let books = DataFileManager.loadData()
 
@@ -33,4 +33,4 @@ class Book {
 		DataFileManager.deleteItemById(id)
 	}
 }
-export default Book
+export default BookModel

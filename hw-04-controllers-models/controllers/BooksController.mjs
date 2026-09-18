@@ -1,4 +1,4 @@
-import Book from '../models/Book.mjs'
+import BookModel from '../models/BookModel.mjs'
 
 class BooksController {
 	static books(req, res) {
@@ -10,7 +10,7 @@ class BooksController {
 				year: year.trim(),
 			}
 
-			const booksList = Book.loadBooksList(filters)
+			const booksList = BookModel.loadBooksList(filters)
 
 			res.render('books/bookList', {
 				title: 'Books Page',
@@ -28,7 +28,7 @@ class BooksController {
 	static bookDetail(req, res) {
 		try {
 			const id = req.params.id
-			const book = Book.getBookById(id)
+			const book = BookModel.getBookById(id)
 
 			res.render('books/bookDetail', {
 				title: 'Інформація про книгу',
@@ -43,7 +43,7 @@ class BooksController {
 	}
 	static getBookForm(req, res) {
 		try {
-			const book = req.params.id ? Book.getBookById(req.params.id) : {}
+			const book = req.params.id ? BookModel.getBookById(req.params.id) : {}
 			res.render('books/bookForm', {
 				book,
 			})
@@ -57,7 +57,7 @@ class BooksController {
 	static createBook(req, res) {
 		try {
 			const bookData = req.body
-			Book.addNewBook(bookData)
+			BookModel.addNewBook(bookData)
 			res.redirect('/books')
 		} catch (error) {
 			res.status(500).render('error', {
@@ -69,7 +69,7 @@ class BooksController {
 	static updateBook(req, res) {
 		try {
 			const id = req.params.id
-			Book.updateBook(id, req.body)
+			BookModel.updateBook(id, req.body)
 			res.redirect('/books')
 		} catch (error) {
 			res.status(500).render('error', {
@@ -80,7 +80,7 @@ class BooksController {
 	}
 	static deleteBook(req, res) {
 		try {
-			Book.deleteBookById(req.body.id)
+			BookModel.deleteBookById(req.body.id)
 			res.status(204).end()
 		} catch (error) {
 			res.status(500).render('error', {

@@ -60,7 +60,7 @@
             <input value="<%= car.photo %>" type="file" name="photo" accept="image/*" onchange="handleImageInput(event)" />
           </label>
           <div class="car-form__image-wrapper">
-            <img id="carPhoto" src="<%=car.photo?`/${car.photo}` : '/images/no-available-car.jpg' %>" />
+            <img id="carPhoto" src="<%=car.photo ? `/${car.photo}` : '/images/no-available-car.jpg' %>" />
           </div>
         </div>
 

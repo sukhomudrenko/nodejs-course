@@ -1,10 +1,10 @@
-import Cars from '../models/CarModel.mjs'
+import CarsModel from '../models/CarsModel.mjs'
 import { deleteFileFromDir } from '../utils/utils.js'
 
 class CarsController {
 	static cars(req, res) {
 		try {
-			const carList = Cars.loadCarList()
+			const carList = CarsModel.loadCarList()
 
 			res.render('cars/carList', {
 				title: 'Cars Page',
@@ -21,7 +21,7 @@ class CarsController {
 	static carDetail(req, res) {
 		try {
 			const id = req.params.id
-			const car = Cars.getCarById(id)
+			const car = CarsModel.getCarById(id)
 
 			res.render('cars/carDetail', {
 				title: 'Інформація про машину',
@@ -36,7 +36,7 @@ class CarsController {
 	}
 	static getCarForm(req, res) {
 		try {
-			const car = req.params.id ? Cars.getCarById(req.params.id) : {}
+			const car = req.params.id ? CarsModel.getCarById(req.params.id) : {}
 			res.render('cars/carForm', {
 				car,
 			})
@@ -53,7 +53,7 @@ class CarsController {
 			if (req.file) {
 				carData.photo = req.file.filename
 			}
-			Cars.addNewCar(carData)
+			CarsModel.addNewCar(carData)
 			res.redirect('/cars')
 		} catch (error) {
 			res.status(500).render('error', {
@@ -65,7 +65,7 @@ class CarsController {
 	static updateCar(req, res) {
 		try {
 			const id = req.params.id
-			const car = Cars.getCarById(id)
+			const car = CarsModel.getCarById(id)
 
 			const carData = { ...req.body }
 			// Якщо користувач завантажив нове фото
@@ -80,7 +80,7 @@ class CarsController {
 				carData.photo = car.photo
 			}
 
-			Cars.updateCar(id, carData)
+			CarsModel.updateCar(id, carData)
 			res.redirect('/cars')
 		} catch (error) {
 			res.status(500).render('error', {
@@ -92,11 +92,11 @@ class CarsController {
 	static deleteCar(req, res) {
 		try {
 			const id = req.body.id
-			const car = Cars.getCarById(id)
+			const car = CarsModel.getCarById(id)
 			if (car.photo) {
 				deleteFileFromDir('uploads', car.photo)
 			}
-			Cars.deleteCarById(id)
+			CarsModel.deleteCarById(id)
 			res.status(204).end()
 		} catch (error) {
 			res.status(500).render('error', {

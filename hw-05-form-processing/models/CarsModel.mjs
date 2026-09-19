@@ -1,6 +1,6 @@
 import DataFileManager from '../services/DataFileManager.mjs'
 
-class Cars {
+class CarsModel {
 	static loadCarList() {
 		return DataFileManager.loadData()
 	}
@@ -17,4 +17,4 @@ class Cars {
 		DataFileManager.deleteItemById(id)
 	}
 }
-export default Cars
+export default CarsModel

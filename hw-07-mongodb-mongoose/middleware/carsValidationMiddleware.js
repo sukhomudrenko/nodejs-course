@@ -1,4 +1,3 @@
-// import Cars from '../models/CarModel.mjs'
 import * as carService from '../services/carService.js'
 import { deleteFileFromDir } from '../utils/utils.js'
 
@@ -23,7 +22,9 @@ export function carsValidationMiddleware(validationSchema) {
 				},
 				errors: result.error.issues.map((err) => err.message),
 
-				errorsByFiled: Object.fromEntries(result.error.issues.map((err) => [err.path[0], err.message])),
+				errorsByFiled: Object.fromEntries(
+					result.error.issues.map((err) => [err.path[0], err.message]),
+				),
 			})
 		}
 		//якщо не було помилок валідації

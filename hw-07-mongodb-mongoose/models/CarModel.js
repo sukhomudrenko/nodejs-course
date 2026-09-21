@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+
 const carSchema = new mongoose.Schema(
 	{
 		brand: {
@@ -29,4 +30,5 @@ const carSchema = new mongoose.Schema(
 	},
 	{ timestamps: true },
 )
-export default mongoose.model('Car', carSchema)
+
+export default mongoose.model('CarModel', carSchema, 'cars') // CarModel - це назва моделі, cars це назва колекції в MongoDb

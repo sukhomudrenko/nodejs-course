@@ -6,9 +6,7 @@ import indexRouter from './routes/index.mjs'
 import carsRouter from './routes/carsRouter.mjs'
 import { __dirname } from './settings.mjs'
 // =====
-import { fileURLToPath } from 'url'
 import connectDB from './db/db.js'
-import config from './config/default.mjs'
 // import { errorHandler } from './middlewares/errorHandler.js'
 import { cleanupTmpUploads } from './utils/cleanupTmpUploads.js'
 const app = express()

@@ -7,7 +7,6 @@ import carsRouter from './routes/carsRouter.mjs'
 import { __dirname } from './settings.mjs'
 // =====
 import connectDB from './db/db.js'
-// import { errorHandler } from './middlewares/errorHandler.js'
 import { cleanupTmpUploads } from './utils/cleanupTmpUploads.js'
 const app = express()
 connectDB()

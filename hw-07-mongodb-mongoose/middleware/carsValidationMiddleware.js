@@ -7,6 +7,10 @@ export function carsValidationMiddleware(validationSchema) {
 
 		// якщо result не успішний а є помилки, то виконуємо наступні дії
 		if (!result.success) {
+			if (req.file) {
+				deleteFileFromDir('uploads-tmp', req.file.filename)
+			}
+
 			let car = {}
 
 			if (req.params.id) {

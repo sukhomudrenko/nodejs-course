@@ -52,7 +52,7 @@ class CarsController {
 	}
 	static async registerCar(req, res) {
 		try {
-			const carData = { ...req.body }
+			const carData = { ...req.validatedCarsData }
 
 			if (req.file) {
 				const tmpPath = req.file.path
@@ -81,7 +81,7 @@ class CarsController {
 			const id = req.params.id
 			const car = await carService.getCarById(id)
 
-			const carData = { ...req.body, year: Number(req.body.year) }
+			const carData = { ...req.validatedCarsData }
 
 			// Якщо існує фото
 			if (req.file) {

@@ -1,4 +1,5 @@
 import path from 'path'
+
 class MainController {
 	static getMainPage(req, res, next) {
 		const filePath = path.join(process.cwd(), 'public', 'html', 'home.html')

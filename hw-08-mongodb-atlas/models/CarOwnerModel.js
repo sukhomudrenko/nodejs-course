@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
-const ownerSchema = new mongoose.Schema(
+
+const carOwnerSchema = new mongoose.Schema(
 	{
 		address: {
 			type: String,
@@ -14,4 +15,4 @@ const ownerSchema = new mongoose.Schema(
 	},
 	{ timestamps: true },
 )
-export default mongoose.model('Owner', ownerSchema)
+export default mongoose.model('CarOwnerModel', carOwnerSchema, 'owners')

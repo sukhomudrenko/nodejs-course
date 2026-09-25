@@ -1,21 +1,25 @@
-import Owner from '../models/CarOwner.js'
+import CarOwnerModel from '../models/CarOwnerModel.js'
 
 export const getAllOwners = async () => {
-	return await Owner.find()
+	return await CarOwnerModel.find()
 }
+
 export const getOwnerById = async (id) => {
-	return await Owner.findById(id)
+	return await CarOwnerModel.findById(id)
 }
+
 export const createOwner = async (ownerData) => {
-	const owner = new Owner(ownerData)
-	return await owner.save()
+	const newOwner = new CarOwnerModel(ownerData)
+	return await newOwner.save()
 }
+
 export const updateOwner = async (id, ownerData) => {
-	return await Owner.findByIdAndUpdate(id, ownerData, {
+	return await CarOwnerModel.findByIdAndUpdate(id, ownerData, {
 		new: true,
 		runValidators: true,
 	})
 }
+
 export const deleteOwnerById = async (id) => {
-	return await Owner.findByIdAndDelete(id)
+	return await CarOwnerModel.findByIdAndDelete(id)
 }

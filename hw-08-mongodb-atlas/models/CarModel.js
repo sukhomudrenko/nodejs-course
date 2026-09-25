@@ -30,9 +30,13 @@ const carSchema = new mongoose.Schema(
 		},
 		owner: {
 			type: Schema.Types.ObjectId,
-			ref: 'Owner',
+			ref: 'CarOwnerModel',
+		},
+		bodyType: {
+			type: Schema.Types.ObjectId,
+			ref: 'CarBodyTypeModel',
 		},
 	},
 	{ timestamps: true },
 )
-export default mongoose.model('Car', carSchema)
+export default mongoose.model('CarModel', carSchema, 'cars')

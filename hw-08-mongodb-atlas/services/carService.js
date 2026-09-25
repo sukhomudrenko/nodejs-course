@@ -1,20 +1,25 @@
-import Car from '../models/Car.js'
+import CarModel from '../models/CarModel.js'
+
 export const getAllCars = async () => {
-	return await Car.find().populate('owner')
+	return await CarModel.find().populate('owner').populate('bodyType')
 }
+
 export const getCarById = async (id) => {
-	return await Car.findById(id).populate('owner')
+	return await CarModel.findById(id).populate('owner').populate('bodyType')
 }
+
 export const createCar = async (carData) => {
-	const car = new Car(carData)
-	return await car.save()
+	const newCar = new CarModel(carData)
+	return await newCar.save()
 }
+
 export const updateCar = async (id, carData) => {
-	return await Car.findByIdAndUpdate(id, carData, {
+	return await CarModel.findByIdAndUpdate(id, carData, {
 		new: true,
 		runValidators: true,
 	})
 }
+
 export const deleteCarById = async (id) => {
-	return await Car.findByIdAndDelete(id)
+	return await CarModel.findByIdAndDelete(id)
 }

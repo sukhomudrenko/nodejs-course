@@ -1,7 +1,13 @@
 import * as z from 'zod'
+
 const currentYear = new Date().getFullYear()
+
 export const carsValidationSchema = z.object({
-	brand: z.string().nonempty({ message: 'Вкажіть бренд' }).min(2, { message: 'Бренд має бути мінімум з 2-х символів' }).trim(),
+	brand: z
+		.string()
+		.nonempty({ message: 'Вкажіть бренд' })
+		.min(2, { message: 'Бренд має бути мінімум з 2-х символів' })
+		.trim(),
 	plate: z
 		.string()
 		.trim()
@@ -15,5 +21,13 @@ export const carsValidationSchema = z.object({
 		.gte(1900, { message: 'Рік має бути не менше 1900' })
 		.lte(currentYear, { message: `Рік має бути не більше ${currentYear}` }),
 	description: z.string().trim().optional(),
-	owner: z.string({ required_error: "Власник є обов'язковим" }).trim().min(1, { message: "Власник є обов'язковим" }),
+	owner: z
+		.string({ required_error: "Власник є обов'язковим" })
+		.trim()
+		.min(1, { message: "Власник є обов'язковим" }),
+	bodyType: z
+		.string()
+		.trim()
+		.optional()
+		.transform((value) => value || undefined),
 })

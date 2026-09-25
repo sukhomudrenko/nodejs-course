@@ -6,10 +6,7 @@ import indexRouter from './routes/index.mjs'
 import carsRouter from './routes/carsRouter.mjs'
 import { __dirname } from './settings.mjs'
 // =====
-import { fileURLToPath } from 'url'
 import connectDB from './db/db.js'
-import config from './config/default.mjs'
-// import { errorHandler } from './middlewares/errorHandler.js'
 import { cleanupTmpUploads } from './utils/cleanupTmpUploads.js'
 const app = express()
 connectDB()
@@ -22,7 +19,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, 'uploads'))) // для того щоб була публічна папка і можна знайти зображення
+app.use(express.static(path.join(__dirname, 'uploads'))) // публічна папка для збереження файлів
 app.use('/', indexRouter)
 app.use('/cars', carsRouter)
 
@@ -37,6 +34,7 @@ app.use((err, req, res, next) => {
 	// set locals, only providing error in development
 	res.locals.message = err.message
 	res.locals.error = req.app.get('env') === 'development' ? err : {}
+
 	// render the error page
 	res.status(err.status || 500)
 	res.render('error')

@@ -1,5 +1,4 @@
 import { Router } from 'express'
-// import CarsController from '../controllers/CarsControllers.mjs'
 import uploadMiddleWare from '../middleware/uploadMiddleware.mjs'
 import { carsValidationSchema } from '../validators/carsValidationSchema.js'
 

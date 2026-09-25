@@ -23,8 +23,12 @@
 }
 
 /* Disabled placeholder color */
-.car-form select:invalid {
+.car-form select:invalid,
+.car-form select:has(option[value='']:checked) {
 	color: rgba(255, 255, 255, 0.45);
+}
+.car-form select option {
+	color: #fff;
 }
 /* =========================
    Car form layout

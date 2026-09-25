@@ -5,6 +5,10 @@
       <%= placeholder %>
     </option>
 
+    <% if (!required) { %>
+    <option value=""><%= placeholderEmpty %></option>
+    <% } %>
+
     <% options.forEach(option => { %>
     <option value="<%= option._id %>" <%= selectedId === option._id.toString() ? "selected" : "" %>>
       <%= option[optionLabel] %>

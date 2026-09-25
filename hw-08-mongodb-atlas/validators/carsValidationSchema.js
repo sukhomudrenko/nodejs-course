@@ -29,5 +29,5 @@ export const carsValidationSchema = z.object({
 		.string()
 		.trim()
 		.optional()
-		.transform((value) => value || undefined),
+		.transform((value) => value || null),
 })

@@ -1,6 +1,6 @@
 import { deleteFileFromDir, moveFile } from '../utils/utils.js'
 import * as carService from '../services/carService.js'
-import * as ownersService from '../services/ownerService.js'
+import { buildCarFormData } from '../services/carFormData.js'
 import fs from 'fs'
 import path from 'path'
 
@@ -8,7 +8,6 @@ class CarsController {
 	static async carList(req, res) {
 		try {
 			const carList = await carService.getAllCars()
-			console.log('🚀 ~ CarsController ~ carList ~ carList:', carList)
 
 			res.render('cars/carList', {
 				title: 'Cars Page',
@@ -26,11 +25,9 @@ class CarsController {
 		try {
 			const id = req.params.id
 			const car = await carService.getCarById(id)
-			console.log('🚀 ~ CarsController ~ carDetail ~ car:', car)
 
 			res.render('cars/carDetail', {
 				title: 'Інформація про машину',
-
 				car,
 			})
 		} catch (error) {
@@ -43,15 +40,8 @@ class CarsController {
 	static async getCarForm(req, res) {
 		try {
 			const car = req.params.id ? await carService.getCarById(req.params.id) : {}
-			const owners = await ownersService.getAllOwners()
-			const ownerId = car?.owner?._id?.toString() || car?.owner?.toString() || null
-			res.render('cars/carForm', {
-				car,
-				owners,
-				ownerId,
-				errorsByFiled: null,
-				errors: null,
-			})
+
+			res.render('cars/carForm', await buildCarFormData(car))
 		} catch (error) {
 			res.status(500).render('error', {
 				message: 'Помилка при створенні форми',
@@ -60,7 +50,7 @@ class CarsController {
 	}
 	static async registerCar(req, res) {
 		try {
-			const carData = { ...req.body }
+			const carData = { ...req.validatedCarsData }
 
 			if (req.file) {
 				const tmpPath = req.file.path
@@ -89,7 +79,7 @@ class CarsController {
 			const id = req.params.id
 			const car = await carService.getCarById(id)
 
-			const carData = { ...req.body, year: Number(req.body.year) }
+			const carData = { ...req.validatedCarsData }
 
 			// Якщо існує фото
 			if (req.file) {

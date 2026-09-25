@@ -1,0 +1,15 @@
+<label>
+  <span><%= label %></span>
+  <select name="<%= name %>" <%= required ? "required" : "" %>>
+    <option value="" disabled <%= !selectedId ? "selected" : "" %> hidden>
+      <%= placeholder %>
+    </option>
+
+    <% options.forEach(option => { %>
+    <option value="<%= option._id %>" <%= selectedId === option._id.toString() ? "selected" : "" %>>
+      <%= option[optionLabel] %>
+    </option>
+    <% }) %>
+  </select>
+  <small class="car-form__error"><%= error %></small>
+</label>

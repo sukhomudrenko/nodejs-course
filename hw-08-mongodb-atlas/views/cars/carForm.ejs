@@ -2,12 +2,8 @@
 <html lang="en">
 
 <head>
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-  <link rel="stylesheet" href="/stylesheets/style.css" />
   <link rel="stylesheet" href="/stylesheets/carForm.css" />
-  <link rel="stylesheet" href="/stylesheets/footer.css" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%-include('../components/meta.ejs') %>
   <script>
     function handleImageInput(event) {
       const file = event.target.files[0]
@@ -73,21 +69,27 @@
           <span>Опис авто</span>
           <input value="<%= car.description %>" type="text" name="description" />
         </label>
-        <label>
-          <span>Власник авто</span>
-          <select name="owner" required>
-            <option value="" disabled <%= !ownerId ? 'selected' : '' %> hidden>
-              Виберіть власника
-            </option>
+        <%- include('../components/selectField.ejs', {
+          label: 'Власник авто',
+          name: 'owner',
+          placeholder: 'Виберіть власника',
+          options: owners,
+          optionLabel: 'fullName',
+          selectedId: ownerId,
+          required: true,
+          error: errorsByFiled?.owner,
+        }) %>
 
-            <% owners.forEach(owner => { %>
-            <option value="<%= owner._id %>" <%= ownerId === owner._id.toString() ? 'selected' : '' %>>
-              <%= owner.fullName %>
-            </option>
-            <% }) %>
-          </select>
-          <small class="car-form__error"><%= errorsByFiled?.owner %></small>
-        </label>
+        <%- include('../components/selectField.ejs', {
+          label: 'Тип кузова',
+          name: 'bodyType',
+          placeholder: 'Виберіть тип кузова',
+          options: bodyTypes,
+          optionLabel: 'name',
+          selectedId: bodyTypeId,
+          required: false,
+          error: errorsByFiled?.bodyType,
+        }) %>
         <div class="car-form__image-update">
           <label>
             <span>Фото авто</span>

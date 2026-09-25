@@ -2,16 +2,11 @@
 <html lang="en">
 
 <head>
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-  <link rel="stylesheet" href="/stylesheets/style.css" />
   <link rel="stylesheet" href="/stylesheets/carList.css" />
-  <link rel="stylesheet" href="/stylesheets/footer.css" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%-include('../components/meta.ejs') %>
   <title><%= title %></title>
   <script>
     async function deleteCar(id) {
-
       try {
         const response = await fetch(`/cars/${id}`, {
           method: 'delete',
@@ -60,8 +55,15 @@
               <strong><%= car.year %></strong>
             </div>
             <div class="car-meta">
+              <span>Тип кузова</span>
+              <strong>
+                <%= car.bodyType ? `${car.bodyType.name}`: 'Не вказано' %>
+                <%= car.bodyType?.code ? `(${car.bodyType.code})` : '' %>
+              </strong>
+            </div>
+            <div class="car-meta">
               <span>ПІБ</span>
-              <strong><%= car.owner ? car.owner.fullName: '' %></strong>
+              <strong><%= car.owner ? car.owner.fullName : '' %></strong>
             </div>
           </div>
           <div class="car-card__actions">

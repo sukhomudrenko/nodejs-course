@@ -1,6 +1,6 @@
-// Функція для підключення до MongoDB
 import mongoose from 'mongoose'
 import config from '../config/default.mjs'
+
 const connectDB = async () => {
 	try {
 		await mongoose.connect(config.mongoURI)
